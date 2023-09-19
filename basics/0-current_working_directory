@@ -1,1 +1,2 @@
-/alu-shell/basics
+#!/bin/bash
+pwd
