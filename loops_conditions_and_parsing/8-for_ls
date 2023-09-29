@@ -1,16 +1,9 @@
 #!/usr/bin/env bash
-# Iterate through each directory in the current directory
-for dir in */; do
-    # Check if the directory contains files with dashes
-    if ls "$dir" | grep -q -- -; then
-        echo "$dir"
-        # List files and subdirectories in the directory
-        for item in "$dir"*; do
-            # Check if it's not a hidden file or directory
-            if [[ ! "$item" =~ ^\..* ]]; then
-                echo "$(basename "$item")"
-            fi
-        done
-    fi
+# list every file
+for file in *
+do
+  if [[ $file != .* && $file != *"-"* ]]; then
+    echo "${file#*-}"
+  fi
 done
 
