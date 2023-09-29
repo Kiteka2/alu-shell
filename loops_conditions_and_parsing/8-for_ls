@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
-# This script lists the content of the current directory, including hidden files, empty folders, and special files.
 
-for file in *
-do
-  echo "$file"
+# Iterate through each file in the current directory
+for file in *; do
+    # Check if the file is not hidden and has a dash in the name
+    if [[ ! "$file" =~ ^\..* && "$file" =~ - ]]; then
+        # Use cut to extract the part of the name after the first dash
+        name_after_dash=$(echo "$file" | cut -d'-' -f2-)
+        echo "$name_after_dash"
+    fi
 done
 
