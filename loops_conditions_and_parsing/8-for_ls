@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
-# task 7.
+# This script lists the content of the current directory, including hidden files, empty folders, and special files.
 
 for file in *
 do
-  if [[ $file != .* && $file != *"-"* ]]; then
-    echo "${file#*-}"
-  fi
+  echo "$file"
 done
 
