@@ -1,18 +1,20 @@
 #!/usr/bin/env bash
-# Loop through each file in the current directory (excluding hidden files)
-for file in *
+# Open the /etc/passwd file for reading
+
+exec 3< /etc/passwd
+
+# Loop through each line of the file
+while read -u 3 line
 do
-  # Check if the file is a regular file and not a directory
-  if [ -f "$file" ]; then
+  # Extract the username, user id, and home directory path for each user
+  username=$(echo "$line" | cut -d: -f1)
+  uid=$(echo "$line" | cut -d: -f3)
+  home=$(echo "$line" | cut -d: -f6)
   
-    # Check if the file name contains a dash
-    if [[ "$file" == *-* ]]; then
-      name=$(echo "$file" | cut -d'-' -f2-)
-      echo "$name"
-    else
-      echo "$file"
-    fi
-    
-  fi
+  # Display the extracted information
+   echo "$username:$uid:$home"
 done
+
+# Close the file descriptor for /etc/passwd
+exec 3<&-
 
