@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
-# Iterate through each file in the current directory
-for file in *; do
-    # Check if the file is not hidden and has a dash in the name
-    if [[ ! "$file" =~ ^\..* && "$file" =~ - ]]; then
-        # Use cut to extract the part of the name after the first dash
-        name_after_dash=$(echo "$file" | cut -d'-' -f2-)
-        echo "$name_after_dash"
+# Iterate through each directory in the current directory
+for dir in */; do
+    # Check if the directory contains files with dashes
+    if ls "$dir" | grep -q -- -; then
+        echo "$dir"
+        # List files and subdirectories in the directory
+        for item in "$dir"*; do
+            # Check if it's not a hidden file or directory
+            if [[ ! "$item" =~ ^\..* ]]; then
+                echo "$(basename "$item")"
+            fi
+        done
     fi
 done
 
