@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# task 7.
 
 for file in *
 do
