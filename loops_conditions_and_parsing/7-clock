@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
-# This script displays the time for 12 hours and 59 minutes, and displays the hours and minutes separately.
-
-hour=0
-
-while [ $hour -le 12 ]
+# Loop through each file in the current directory (excluding hidden files)
+for file in *
 do
-    echo "Hour: $hour"
-    minute=1
-    while [ $minute -le 59 ]
-    do
-        echo $minute
-        minute=$((minute+1))
-    done
-    hour=$((hour+1))
+  # Check if the file is a regular file and not a directory
+  if [ -f "$file" ]; then
+  
+    # Check if the file name contains a dash
+    if [[ "$file" == *-* ]]; then
+      name=$(echo "$file" | cut -d'-' -f2-)
+      echo "$name"
+    else
+      echo "$file"
+    fi
+    
+  fi
 done

@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
-# passww
-while IFS=':' read -r username x uid gid info home shell; do
-  echo "$username:$uid:$home"
-done < /etc/passwd
+# Loop through each file in the current directory (excluding hidden files)
+for file in *
+do
+  # Check if the file is a regular file and not a directory
+  if [ -f "$file" ]; then
+  
+    # Check if the file name contains a dash
+    if [[ "$file" == *-* ]]; then
+      name=$(echo "$file" | cut -d'-' -f2-)
+      echo "$name"
+    else
+      echo "$file"
+    fi
+    
+  fi
+done
 
