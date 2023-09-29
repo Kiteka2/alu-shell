@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Iterate through each file in the current directory
 for file in *; do
     # Check if the file is not hidden and has a dash in the name
