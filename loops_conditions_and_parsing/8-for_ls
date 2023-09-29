@@ -1,9 +1,17 @@
 #!/usr/bin/env bash
-# list every file
+# Loop through each file in the current directory (excluding hidden files)
 for file in *
 do
-  if [[ $file != .* && $file != *"-"* ]]; then
-    echo "${file#*-}"
+  # Check if the file is a regular file and not a directory
+  if [ -f "$file" ]; then
+  
+    # Check if the file name contains a dash
+    if [[ "$file" == *-* ]]; then
+      name=$(echo "$file" | cut -d'-' -f2-)
+      echo "$name"
+    else
+      echo "$file"
+    fi
+    
   fi
 done
-
